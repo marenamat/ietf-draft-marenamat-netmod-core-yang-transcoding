@@ -4,11 +4,11 @@
 
 WG Working Group                                              Y. N. Here
 Internet-Draft                                    Your Organization Here
-Intended status: Informational                          25 February 2026
+Intended status: Standards Track                        25 February 2026
 Expires: 29 August 2026
 
 
-                           TODO - Your title
+                   Transcoding Data Modeled with YANG
                   draft-todo-yourname-protocol-latest
 
 Abstract
