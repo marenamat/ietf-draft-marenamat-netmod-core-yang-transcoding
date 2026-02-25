@@ -19,9 +19,9 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
-category: info
+title: "Transcoding Data Modeled with YANG"
+abbrev: "Transcoding YANG Data"
+category: std
 
 docname: draft-todo-yourname-protocol-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
