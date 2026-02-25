@@ -5,15 +5,22 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Transcoding Data Modeled with YANG</title>
-<meta content="Your Name Here" name="author">
+<meta content="Maria Matejka" name="author">
 <meta content="
-       TODO Abstract 
+       YANG (RFC 7950) is a standardized data modeling language. The data
+may be encoded in XML (RFC 7950), JSON (RFC 7951), plain CBOR (RFC 9254)
+or CBOR with standins (draft-bormann-cbor-yang-standin). 
+       This document specifies how to convert data modeled by YANG encoded in one of
+the formats into another format. Use cases include e.g. local transcoding between Netconf and Restconf
+for tool compatibility, or reverse proxying while composing multiple backends. 
+       This document also defines a data annotation for additional value type
+specification. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
-<meta content="draft-todo-yourname-protocol-latest" name="ietf.draft">
+<meta content="draft-marenamat-netmod-core-yang-transcoding-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.31.0
     Python 3.12.12
@@ -1050,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">February 2026</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Here</td>
+<td class="left">Matejka</td>
 <td class="center">Expires 29 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1059,9 +1066,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">WG Working Group</dd>
+<dd class="workgroup">Network Modeling</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-todo-yourname-protocol-latest</dd>
+<dd class="internet-draft">draft-marenamat-netmod-core-yang-transcoding-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2026-02-25" class="published">25 February 2026</time>
@@ -1073,8 +1080,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
-      <div class="author-name">Y. N. Here</div>
-<div class="org">Your Organization Here</div>
+      <div class="author-name">M. Matejka</div>
+<div class="org">CZ.NIC</div>
 </div>
 </dd>
 </dl>
@@ -1082,7 +1089,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Transcoding Data Modeled with YANG</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">YANG (RFC 7950) is a standardized data modeling language. The data
+may be encoded in XML (RFC 7950), JSON (RFC 7951), plain CBOR (RFC 9254)
+or CBOR with standins (draft-bormann-cbor-yang-standin).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document specifies how to convert data modeled by YANG encoded in one of
+the formats into another format. Use cases include e.g. local transcoding between Netconf and Restconf
+for tool compatibility, or reverse proxying while composing multiple backends.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">This document also defines a data annotation for additional value type
+specification.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1090,14 +1104,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://example.com/LATEST">https://example.com/LATEST</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-todo-yourname-protocol/">https://datatracker.ietf.org/doc/draft-todo-yourname-protocol/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://marenamat.github.io/ietf-draft-marenamat-netmod-core-yang-transcoding/draft-marenamat-netmod-core-yang-transcoding.html">https://marenamat.github.io/ietf-draft-marenamat-netmod-core-yang-transcoding/draft-marenamat-netmod-core-yang-transcoding.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-marenamat-netmod-core-yang-transcoding/">https://datatracker.ietf.org/doc/draft-marenamat-netmod-core-yang-transcoding/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
-        WG Working Group mailing list (<span><a href="mailto:WG@example.com">mailto:WG@example.com</a></span>),
-        which is archived at <span><a href="https://example.com/WG">https://example.com/WG</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+        Network Modeling Working Group mailing list (<span><a href="mailto:netmod@ietf.org">mailto:netmod@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/netmod/">https://mailarchive.ietf.org/arch/browse/netmod/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/netmod/">https://www.ietf.org/mailman/listinfo/netmod/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/USER/REPO">https://github.com/USER/REPO</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/marenamat/ietf-draft-marenamat-netmod-core-yang-transcoding">https://github.com/marenamat/ietf-draft-marenamat-netmod-core-yang-transcoding</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1154,19 +1169,36 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-transcoding-data-formats" class="internal xref">Transcoding Data Formats</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-the-union-built-in-type" class="internal xref">The union Built-In Type</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-original-type-annotation" class="internal xref">Original type annotation</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-proxying-netconf-restconf-a" class="internal xref">Proxying NETCONF, RESTCONF and CORECONF protocols</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1177,7 +1209,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Current documents focus on encoding and specifying data for a simple round-trip
+between a source encoder and a destination decoder. While <span><a href="https://rfc-editor.org/rfc/rfc8040#section-1.4" class="relref">Section 1.4</a> of [<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>
+at least touches the topic of RESTCONF and NETCONF (<span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span>) coexisting at one device,
+there has not yet been any specification for chaining multiple encodings.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">At the time of this document, there are at least four kinds of data encoding
+(XML, JSON, plain CBOR and standin CBOR) and at least three protocol variants
+(NETCONF, RESTCONF and CORECONF). Implementing all of these may be too costly,
+and therefore users will tend to deploy convertor tools and proxies to align
+the otherwise incompatible data and protocols.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">One major usecase for this specification is a simple proxy to bridge clients
+and servers implementing incompatible encodings. Another example usecase
+is a reverse proxy used as a single endpoint for a device with multiple
+internal endpoint. Such a proxy may be transparent when the user knowingly
+deployed it, or opaque if it's a part of a third party device. The user
+may even be completely unaware of such a proxy existing.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1191,35 +1237,199 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations">
+<div id="transcoding-data-formats">
 <section id="section-3">
-      <h2 id="name-security-considerations">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-transcoding-data-formats">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-transcoding-data-formats" class="section-name selfRef">Transcoding Data Formats</a>
       </h2>
-<p id="section-3-1">TODO Security<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Encoding capabilities of XML, JSON or CBOR are quite different. While all
+values in XML are strings, JSON knows also booleans and integers, and CBOR
+may even use the tag features to encode various additional types, like time
+values or IP addresses, as specified in <span>[<a href="#I-D.bormann-cbor-yang-standin" class="cite xref">I-D.bormann-cbor-yang-standin</a>]</span>. This effectively means
+that a transcoding node either loses type information, or it must infer that
+information from the data representation.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Generally, a transcoder <span class="bcp14">MUST</span> interpret the incoming data according to the
+appropriate YANG model, and choose the appropriate output representation for
+each value according to the model. Transcoders also <span class="bcp14">SHOULD</span> validate the data
+and issue appropriate error messages to the user. Otherwise, the user may
+get confused by an error message proxied from the endpoint, referring to
+a different data format than the user is using.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Transcoders <span class="bcp14">SHOULD</span> quietly canonicalize value representations according
+to the YANG model. Since by <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.1" class="relref">Section 9.1</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> most types have
+a canonical representation which <span class="bcp14">MUST</span> be used for all conceivable purposes,
+it's expected that no valuable information is lost by such conversion.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">However, transcoders <span class="bcp14">MUST NOT</span> perform any value conversion which loses data
+precision.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">Examples:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">For <code>leaf item { type int32; }</code>, it's expected that <code>&lt;item&gt;+3&lt;/item&gt;</code> in XML
+gets converted to <code>"item": 3</code> in JSON, and by that the value representation
+loses its original non-canonical string representation.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">For <code>leaf item { type string; }</code>, it's expected that <code>&lt;item&gt;+3&lt;/item&gt;</code> in XML
+gets converted to <code>"item": "+3"</code> in JSON.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Transcoders <span class="bcp14">MAY</span> choose to warn users when they are converting a non-canonical
+value representation.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<div id="the-union-built-in-type">
+<section id="section-3.1">
+        <h3 id="name-the-union-built-in-type">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-the-union-built-in-type" class="section-name selfRef">The union Built-In Type</a>
+        </h3>
+<p id="section-3.1-1">According to <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.12" class="relref">Section 9.12</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>, it's possible to specify that a value
+may be of several types. Transcoders <span class="bcp14">SHOULD</span> perform a conceptual round-trip of
+converting such value to the XML representation and back, to check that the
+resulting value is indeed interpreted as the same type as in the original
+representation.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Example:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3"><code>yang
+leaf item {
+  type union {
+    type int32;
+    type string;
+  }
+}
+</code><a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">If the received JSON data is <code>"item": "+3"</code>, the type is to be interpreted
+as a string, according to <span><a href="https://rfc-editor.org/rfc/rfc7951#section-6.10" class="relref">Section 6.10</a> of [<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>. Yet, after encoding
+to XML, the type information is lost and the value gets reinterpreted as a number.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Transcoders <span class="bcp14">SHOULD</span> issue a warning every time a union-type value is reinterpreted
+as another member type, to avoid possible user confusion, unless the Original Type
+Annotation is used and known to be understood by the other party.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="original-type-annotation">
+<section id="section-3.2">
+        <h3 id="name-original-type-annotation">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-original-type-annotation" class="section-name selfRef">Original type annotation</a>
+        </h3>
+<p id="section-3.2-1">In order to keep the type information with the value even through conversion,
+transcoders <span class="bcp14">MAY</span> attach a type annotation to such a value. The following module
+defines the "original-type" annotation.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2"><code>yang
+module ietf-yang-original-type {
+  prefix "ot";
+  import ietf-yang-metadata {
+    prefix "md";
+  }
+  md:annotation original-type {
+    type string;
+    description "This annotation contains the original type of the annotated value.";
+  }
+}
+</code><a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Example: <code>&lt;item ot:original-type="string"&gt;+3&lt;/item&gt;</code><a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">If the Original Type Annotation is used and understood, contrary to what is
+specified in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.12" class="relref">Section 9.12</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>, the received value <span class="bcp14">MUST</span> be validated
+first against the specified original type, and <span class="bcp14">SHOULD NOT</span> be accepted as any
+other member type, even if a match is found.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">Specifying the Original Type Annotation also resolves possible problems with
+unions containing leafref as a member type. The example in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.12.4" class="relref">Section 9.12.4</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>
+becomes much simpler by explicitly indicating whether the value is intended
+to be interpreted as a leafref or something else. Most notably, the original
+specification requires revalidation every time the target instance may have
+been added or deleted, which may be costly.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="proxying-netconf-restconf-and-coreconf-protocols">
+<section id="section-4">
+      <h2 id="name-proxying-netconf-restconf-a">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-proxying-netconf-restconf-a" class="section-name selfRef">Proxying NETCONF, RESTCONF and CORECONF protocols</a>
+      </h2>
+<p id="section-4-1">If the node behaves as a proxy between different protocols, it should translate
+as wide range of requests as realistically possible.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">When the request is impossible to be fulfilled because the underlying protocol
+lacks the needed capabilities, the proxy <span class="bcp14">MUST</span> indicate this failure by a
+<code>rpc-error</code> response with the <code>error-tag</code> set to <code>operation-not-supported</code>.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">When a single request can't be translated to a single underlying request,
+the proxy may instead perform multiple consecutive requests. If any of these requests fails,
+the proxy <span class="bcp14">MUST</span> issue appropriate rollback requests, and properly relay
+all errors.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">Detailed specification of request and response translation is out of scope
+of this document.<a href="#section-4-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="operational-considerations">
+<section id="section-5">
+      <h2 id="name-operational-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      </h2>
+<p id="section-5-1">Running proxies always adds inherent complexity into the network,
+and it may be better to look for tools natively supporting the required protocol,
+instead of deploying a proxy.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">For device vendors, running a proxy may be an only solution. If a device
+exposes a summary endpoint by a proxy over several sub-endpoints,
+it is recommended to not expose the sub-endpoints even just for debug
+purposes, as accessing a sub-endpoint directly may break some consistency
+expectations on the proxy.<a href="#section-5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">It's required by <span><a href="https://rfc-editor.org/rfc/rfc6241#section-2.2" class="relref">Section 2.2</a> of [<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> that all NETCONF connections
+provide authentication, data integrity, confidentiality and replay protection.
+While different proxies may handle these aspects differently, it <span class="bcp14">MUST</span> be
+documented how these are handled.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Specifically if authentication is terminated at a proxy, the underlying endpoints
+<span class="bcp14">SHOULD</span> be isolated in such a way that they are only accessible through the proxy.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-4">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-4-1">This document has no IANA actions.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">TODO: Do we need to require registration of the YANG module for the Original Type Annotation?<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">(This document has no IANA actions.)<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-5">
+<section id="section-8">
       <h2 id="name-normative-references">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
+<dt id="I-D.bormann-cbor-yang-standin">[I-D.bormann-cbor-yang-standin]</dt>
+      <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">M. Matějka</span>, <span class="refTitle">"Stand-in Tags for YANG-CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-yang-standin-02</span>, <time datetime="2025-08-30" class="refDate">30 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-yang-standin-02">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-yang-standin-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-core-comi">[I-D.ietf-core-comi]</dt>
+      <dd>
+<span class="refAuthor">Veillette, M.</span>, <span class="refAuthor">Van der Stok, P.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bierman, A.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"CoAP Management Interface (CORECONF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-comi-20</span>, <time datetime="2025-05-06" class="refDate">6 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-20">https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-20</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+      <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+      <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7951">[RFC7951]</dt>
+      <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7952">[RFC7952]</dt>
+      <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"Defining and Using Metadata with YANG"</span>, <span class="seriesInfo">RFC 7952</span>, <span class="seriesInfo">DOI 10.17487/RFC7952</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7952">https://www.rfc-editor.org/rfc/rfc7952</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+      <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9254">[RFC9254]</dt>
+    <dd>
+<span class="refAuthor">Veillette, M., Ed.</span>, <span class="refAuthor">Petrov, I., Ed.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Encoding of Data Modeled with YANG in the Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 9254</span>, <span class="seriesInfo">DOI 10.17487/RFC9254</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9254">https://www.rfc-editor.org/rfc/rfc9254</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1229,7 +1439,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">TODO acknowledge.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">This document is a result of prior work of myself and Carsten Bormann
+on <span>[<a href="#I-D.bormann-cbor-yang-standin" class="cite xref">I-D.bormann-cbor-yang-standin</a>]</span>, and design discussions with Vojtěch Vilímek over
+a NETCONF-RESTCONF-CORECONF proxy.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
@@ -1238,11 +1450,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Your Name Here</span></div>
-<div dir="auto" class="left"><span class="org">Your Organization Here</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Maria Matejka</span></div>
+<div dir="auto" class="left"><span class="org">CZ.NIC</span></div>
+<div dir="auto" class="left"><span class="street-address">Milesovska 1136/5</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">13000</span> <span class="locality">Praha</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Czechia</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:your.email@example.com" class="email">your.email@example.com</a>
+<a href="mailto:maria.matejka@nic.cz" class="email">maria.matejka@nic.cz</a>, <a href="mailto:mq@jmq.cz" class="email">mq@jmq.cz</a>
 </div>
 </address>
 </section>
