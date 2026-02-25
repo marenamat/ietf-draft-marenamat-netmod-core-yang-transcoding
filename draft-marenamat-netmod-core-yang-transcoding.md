@@ -70,7 +70,7 @@ specification.
 
 Current documents focus on encoding and specifying data for a simple round-trip
 between a source encoder and a destination decoder. While {{Section 1.4 of -restconf}}
-at least touches the topic of RESTCONF and NETCONF ({{netconf}}) coexisting at one device,
+at least touches the topic of RESTCONF and NETCONF ({{-netconf}}) coexisting at one device,
 there has not yet been any specification for chaining multiple encodings.
 
 At the time of this document, there are at least four kinds of data encoding
