@@ -9,19 +9,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: "Operations and Management"
+workgroup: "Network Modeling"
 keyword:
  - next generation
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "Network Modeling"
+  type: "Working Group"
+  mail: "netmod@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/netmod/"
+  github: "marenamat/ietf-draft-marenamat-netmod-core-yang-transcoding"
+  latest: "https://marenamat.github.io/ietf-draft-marenamat-netmod-core-yang-transcoding/draft-marenamat-netmod-core-yang-transcoding.html"
 
 author:
  -
