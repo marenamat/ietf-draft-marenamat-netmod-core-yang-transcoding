@@ -135,14 +135,14 @@ representation.
 
 Example:
 
-```yang
+~~~yang
 leaf item {
   type union {
     type int32;
     type string;
   }
 }
-```
+~~~
 
 If the received JSON data is `"item": "+3"`, the type is to be interpreted
 as a string, according to {{Section 6.10 of -yang-json}}. Yet, after encoding
@@ -176,7 +176,7 @@ In order to keep the type information with the value even through conversion,
 transcoders (and generally encoders) MAY attach a type annotation to such a value.
 The following module defines the "original-type" annotation.
 
-```yang
+~~~yang
 module ietf-yang-original-type {
   prefix "ot";
   import ietf-yang-metadata {
@@ -187,7 +187,7 @@ module ietf-yang-original-type {
     description "This annotation contains the original type of the annotated value.";
   }
 }
-```
+~~~
 
 Example: `<item ot:original-type="string">+3</item>`
 
