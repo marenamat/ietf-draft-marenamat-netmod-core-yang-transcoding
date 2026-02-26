@@ -1309,7 +1309,8 @@ Annotation is used and known to be understood by the other party.<a href="#secti
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-netconf-reinterpretation-wa" class="section-name selfRef">Netconf Reinterpretation Warning</a>
         </h3>
 <p id="section-3.2-1">An additional error tag is specified for NETCONF, and by extension to RESTCONF and CORECONF.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2"><code>
+<div class="alignLeft art-text artwork" id="section-3.2-2">
+<pre>
 error-tag:      reinterpreted-value
 error-type:     transport, rpc, protocol, application
 error-severity: warning
@@ -1319,7 +1320,8 @@ error-info:     &lt;bad-element&gt; : identifies the elements in the data model
 Description:    An element value has been supplied with an additional type information
                 which could not be conveyed to the final destination, and by dropping
                 this information, the value got reinterpreted as a different type.
-</code><a href="#section-3.2-2" class="pilcrow">¶</a></p>
+</pre><a href="#section-3.2-2" class="pilcrow">¶</a>
+</div>
 <p id="section-3.2-3">TODO: properly augment <code>ietf-netconf:error-tag-type</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1376,12 +1378,21 @@ as wide range of requests as realistically possible.<a href="#section-4-1" class
 <p id="section-4-2">When the request is impossible to be fulfilled because the underlying protocol
 lacks the needed capabilities, the proxy <span class="bcp14">MUST</span> indicate this failure by a
 <code>rpc-error</code> response with the <code>error-tag</code> set to <code>operation-not-supported</code>.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">When a single request can't be translated to a single underlying request,
+<p id="section-4-3">For example, the NETCONF operations <code>&lt;lock&gt;</code> and <code>&lt;unlock&gt;</code> are not defined
+for RESTCONF, and therefore the implementation needs to decide whether to plainly
+refuse them, or to somehow emulate the overall effect.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">When a single request can't be translated to a single underlying request,
 the proxy may instead perform multiple consecutive requests. If any of these requests fails,
 the proxy <span class="bcp14">MUST</span> issue appropriate rollback requests, and properly relay
-all errors.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">Detailed specification of request and response translation is out of scope
-of this document.<a href="#section-4-4" class="pilcrow">¶</a></p>
+all errors, so that the original request's semantics is kept intact.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">For example, if a complex RESTCONF PATCH operation can't be translated to one
+NETCONF request, the proxy may choose to issue <code>&lt;lock&gt;</code>, perform multiple edits
+and finalize by <code>&lt;unlock&gt;</code>. If such an edit fails half-way, the proxy must
+revert it before unlocking and failing, so that the RESTCONF operation
+fails cleanly.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-6">Detailed specification of request and response translation is out of scope
+of this document, and may depend on exact context and even be specific for
+the YANG models supported.<a href="#section-4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -1409,7 +1420,7 @@ provide authentication, data integrity, confidentiality and replay protection.
 While different proxies may handle these aspects differently, it <span class="bcp14">MUST</span> be
 documented how these are handled.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Specifically if authentication is terminated at a proxy, the underlying endpoints
-<span class="bcp14">SHOULD</span> be isolated in such a way that they are only accessible through the proxy.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST</span> be isolated in such a way that they are only accessible through the proxy.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1418,7 +1429,7 @@ documented how these are handled.<a href="#section-6-1" class="pilcrow">¶</a></
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
 <p id="section-7-1">TODO: Do we need to require registration of the YANG module for the Original Type Annotation?<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">(This document has no IANA actions.)<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-2">Otherwise: This document has no IANA actions.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
