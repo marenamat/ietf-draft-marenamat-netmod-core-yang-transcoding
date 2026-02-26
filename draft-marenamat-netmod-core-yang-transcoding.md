@@ -46,8 +46,7 @@ normative:
 
 informative:
 
-#updates:
-#  - RFC7951
+updates: 7950, 7951, 9254
 
 ...
 
@@ -62,7 +61,7 @@ the formats into another format. Use cases include e.g. local transcoding betwee
 for tool compatibility, or reverse proxying while composing multiple backends.
 
 This document also defines a data annotation for additional value type
-specification.
+specification. That data annotation behavior updates RFC 7950, RFC 7951 and RFC 9254.
 
 --- middle
 
@@ -153,11 +152,29 @@ Transcoders SHOULD issue a warning every time a union-type value is reinterprete
 as another member type, to avoid possible user confusion, unless the Original Type
 Annotation is used and known to be understood by the other party.
 
+## Netconf Reinterpretation Warning
+
+An additional error tag is specified for NETCONF, and by extension to RESTCONF and CORECONF.
+
+```
+error-tag:      reinterpreted-value
+error-type:     transport, rpc, protocol, application
+error-severity: warning
+error-info:     <bad-element> : identifies the elements in the data model
+                  which the proxy had to reinterpret to another type.
+                  May appear multiple times.
+Description:    An element value has been supplied with an additional type information
+                which could not be conveyed to the final destination, and by dropping
+                this information, the value got reinterpreted as a different type.
+```
+
+TODO: properly augment `ietf-netconf:error-tag-type`.
+
 ## Original type annotation
 
 In order to keep the type information with the value even through conversion,
-transcoders MAY attach a type annotation to such a value. The following module
-defines the "original-type" annotation.
+transcoders (and generally encoders) MAY attach a type annotation to such a value.
+The following module defines the "original-type" annotation.
 
 ```yang
 module ietf-yang-original-type {
@@ -179,12 +196,21 @@ specified in {{Section 9.12 of -yang}}, the received value MUST be validated
 first against the specified original type, and SHOULD NOT be accepted as any
 other member type, even if a match is found.
 
+By the same logic, this extends {{Section 6.10 of -yang-json}}, so that
+not only the implicit encoding of the value is taken into account, but
+also the Original Type Annotation if present.
+
+TODO: make an annotation draft for CBOR by tagging keys.
+
+When encoding and decoding in and from CBOR with Standins ({{-standin}}),
+a standin SHOULD be used whenever possible.
+
 Specifying the Original Type Annotation also resolves possible problems with
 unions containing leafref as a member type. The example in {{Section 9.12.4 of -yang}}
 becomes much simpler by explicitly indicating whether the value is intended
 to be interpreted as a leafref or something else. Most notably, the original
 specification requires revalidation every time the target instance may have
-been added or deleted, which may be costly.
+been added or deleted, which may be error-prone for development and costly for operations.
 
 # Proxying NETCONF, RESTCONF and CORECONF protocols
 
