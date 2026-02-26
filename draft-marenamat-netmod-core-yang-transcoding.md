@@ -156,7 +156,7 @@ Annotation is used and known to be understood by the other party.
 
 An additional error tag is specified for NETCONF, and by extension to RESTCONF and CORECONF.
 
-```
+~~~
 error-tag:      reinterpreted-value
 error-type:     transport, rpc, protocol, application
 error-severity: warning
@@ -166,7 +166,7 @@ error-info:     <bad-element> : identifies the elements in the data model
 Description:    An element value has been supplied with an additional type information
                 which could not be conveyed to the final destination, and by dropping
                 this information, the value got reinterpreted as a different type.
-```
+~~~
 
 TODO: properly augment `ietf-netconf:error-tag-type`.
 
@@ -221,13 +221,24 @@ When the request is impossible to be fulfilled because the underlying protocol
 lacks the needed capabilities, the proxy MUST indicate this failure by a
 `rpc-error` response with the `error-tag` set to `operation-not-supported`.
 
+For example, the NETCONF operations `<lock>` and `<unlock>` are not defined
+for RESTCONF, and therefore the implementation needs to decide whether to plainly
+refuse them, or to somehow emulate the overall effect.
+
 When a single request can't be translated to a single underlying request,
 the proxy may instead perform multiple consecutive requests. If any of these requests fails,
 the proxy MUST issue appropriate rollback requests, and properly relay
-all errors.
+all errors, so that the original request's semantics is kept intact.
+
+For example, if a complex RESTCONF PATCH operation can't be translated to one
+NETCONF request, the proxy may choose to issue `<lock>`, perform multiple edits
+and finalize by `<unlock>`. If such an edit fails half-way, the proxy must
+revert it before unlocking and failing, so that the RESTCONF operation
+fails cleanly.
 
 Detailed specification of request and response translation is out of scope
-of this document.
+of this document, and may depend on exact context and even be specific for
+the YANG models supported.
 
 # Operational Considerations
 
@@ -249,14 +260,13 @@ While different proxies may handle these aspects differently, it MUST be
 documented how these are handled.
 
 Specifically if authentication is terminated at a proxy, the underlying endpoints
-SHOULD be isolated in such a way that they are only accessible through the proxy.
+MUST be isolated in such a way that they are only accessible through the proxy.
 
 # IANA Considerations
 
 TODO: Do we need to require registration of the YANG module for the Original Type Annotation?
 
-(This document has no IANA actions.)
-
+Otherwise: This document has no IANA actions.
 
 --- back
 
