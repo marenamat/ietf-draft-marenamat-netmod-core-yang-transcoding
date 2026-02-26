@@ -14,7 +14,7 @@ or CBOR with standins (draft-bormann-cbor-yang-standin).
 the formats into another format. Use cases include e.g. local transcoding between Netconf and Restconf
 for tool compatibility, or reverse proxying while composing multiple backends. 
        This document also defines a data annotation for additional value type
-specification. 
+specification. That data annotation behavior updates RFC 7950, RFC 7951 and RFC 9254. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="next generation" name="keyword">
@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Matejka</td>
-<td class="center">Expires 29 August 2026</td>
+<td class="center">Expires 30 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,14 +1069,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="workgroup">Network Modeling</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-marenamat-netmod-core-yang-transcoding-latest</dd>
+<dt class="label-updates">Updates:</dt>
+<dd class="updates">
+<a href="https://www.rfc-editor.org/rfc/rfc7950" class="eref">7950</a>, <a href="https://www.rfc-editor.org/rfc/rfc7951" class="eref">7951</a>, <a href="https://www.rfc-editor.org/rfc/rfc9254" class="eref">9254</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-25" class="published">25 February 2026</time>
+<time datetime="2026-02-26" class="published">26 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-29">29 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-30">30 August 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,7 +1099,7 @@ or CBOR with standins (draft-bormann-cbor-yang-standin).<a href="#section-abstra
 the formats into another format. Use cases include e.g. local transcoding between Netconf and Restconf
 for tool compatibility, or reverse proxying while composing multiple backends.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <p id="section-abstract-3">This document also defines a data annotation for additional value type
-specification.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+specification. That data annotation behavior updates RFC 7950, RFC 7951 and RFC 9254.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1133,7 +1136,7 @@ specification.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1175,7 +1178,10 @@ specification.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-the-union-built-in-type" class="internal xref">The union Built-In Type</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-original-type-annotation" class="internal xref">Original type annotation</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-netconf-reinterpretation-wa" class="internal xref">Netconf Reinterpretation Warning</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-original-type-annotation" class="internal xref">Original type annotation</a></p>
 </li>
             </ul>
 </li>
@@ -1295,15 +1301,35 @@ as another member type, to avoid possible user confusion, unless the Original Ty
 Annotation is used and known to be understood by the other party.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="original-type-annotation">
+<div id="netconf-reinterpretation-warning">
 <section id="section-3.2">
-        <h3 id="name-original-type-annotation">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-original-type-annotation" class="section-name selfRef">Original type annotation</a>
+        <h3 id="name-netconf-reinterpretation-wa">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-netconf-reinterpretation-wa" class="section-name selfRef">Netconf Reinterpretation Warning</a>
         </h3>
-<p id="section-3.2-1">In order to keep the type information with the value even through conversion,
-transcoders <span class="bcp14">MAY</span> attach a type annotation to such a value. The following module
-defines the "original-type" annotation.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2"><code>yang
+<p id="section-3.2-1">An additional error tag is specified for NETCONF, and by extension to RESTCONF and CORECONF.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2"><code>
+error-tag:      reinterpreted-value
+error-type:     transport, rpc, protocol, application
+error-severity: warning
+error-info:     &lt;bad-element&gt; : identifies the elements in the data model
+                  which the proxy had to reinterpret to another type.
+                  May appear multiple times.
+Description:    An element value has been supplied with an additional type information
+                which could not be conveyed to the final destination, and by dropping
+                this information, the value got reinterpreted as a different type.
+</code><a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">TODO: properly augment <code>ietf-netconf:error-tag-type</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="original-type-annotation">
+<section id="section-3.3">
+        <h3 id="name-original-type-annotation">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-original-type-annotation" class="section-name selfRef">Original type annotation</a>
+        </h3>
+<p id="section-3.3-1">In order to keep the type information with the value even through conversion,
+transcoders (and generally encoders) <span class="bcp14">MAY</span> attach a type annotation to such a value.
+The following module defines the "original-type" annotation.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2"><code>yang
 module ietf-yang-original-type {
   prefix "ot";
   import ietf-yang-metadata {
@@ -1314,18 +1340,24 @@ module ietf-yang-original-type {
     description "This annotation contains the original type of the annotated value.";
   }
 }
-</code><a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Example: <code>&lt;item ot:original-type="string"&gt;+3&lt;/item&gt;</code><a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">If the Original Type Annotation is used and understood, contrary to what is
+</code><a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">Example: <code>&lt;item ot:original-type="string"&gt;+3&lt;/item&gt;</code><a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">If the Original Type Annotation is used and understood, contrary to what is
 specified in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.12" class="relref">Section 9.12</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>, the received value <span class="bcp14">MUST</span> be validated
 first against the specified original type, and <span class="bcp14">SHOULD NOT</span> be accepted as any
-other member type, even if a match is found.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">Specifying the Original Type Annotation also resolves possible problems with
+other member type, even if a match is found.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">By the same logic, this extends <span><a href="https://rfc-editor.org/rfc/rfc7951#section-6.10" class="relref">Section 6.10</a> of [<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>, so that
+not only the implicit encoding of the value is taken into account, but
+also the Original Type Annotation if present.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">TODO: make an annotation draft for CBOR by tagging keys.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">When encoding and decoding in and from CBOR with Standins (<span>[<a href="#I-D.bormann-cbor-yang-standin" class="cite xref">I-D.bormann-cbor-yang-standin</a>]</span>),
+a standin <span class="bcp14">SHOULD</span> be used whenever possible.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">Specifying the Original Type Annotation also resolves possible problems with
 unions containing leafref as a member type. The example in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-9.12.4" class="relref">Section 9.12.4</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>
 becomes much simpler by explicitly indicating whether the value is intended
 to be interpreted as a leafref or something else. Most notably, the original
 specification requires revalidation every time the target instance may have
-been added or deleted, which may be costly.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+been added or deleted, which may be error-prone for development and costly for operations.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

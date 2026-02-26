@@ -4,8 +4,9 @@
 
 Network Modeling                                              M. Matejka
 Internet-Draft                                                    CZ.NIC
-Intended status: Standards Track                        25 February 2026
-Expires: 29 August 2026
+Updates: 7950, 7951, 9254 (if approved)                 26 February 2026
+Intended status: Standards Track                                        
+Expires: 30 August 2026
 
 
                    Transcoding Data Modeled with YANG
@@ -23,7 +24,8 @@ Abstract
    compatibility, or reverse proxying while composing multiple backends.
 
    This document also defines a data annotation for additional value
-   type specification.
+   type specification.  That data annotation behavior updates RFC 7950,
+   RFC 7951 and RFC 9254.
 
 About This Document
 
@@ -60,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 30 August 2026.
 
 Copyright Notice
 
@@ -82,7 +84,8 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Transcoding Data Formats
      3.1.  The union Built-In Type
-     3.2.  Original type annotation
+     3.2.  Netconf Reinterpretation Warning
+     3.3.  Original type annotation
    4.  Proxying NETCONF, RESTCONF and CORECONF protocols
    5.  Operational Considerations
    6.  Security Considerations
@@ -184,11 +187,28 @@ Table of Contents
    confusion, unless the Original Type Annotation is used and known to
    be understood by the other party.
 
-3.2.  Original type annotation
+3.2.  Netconf Reinterpretation Warning
+
+   An additional error tag is specified for NETCONF, and by extension to
+   RESTCONF and CORECONF.
+
+   error-tag: reinterpreted-value error-type: transport, rpc, protocol,
+   application error-severity: warning error-info: <bad-element> :
+   identifies the elements in the data model which the proxy had to
+   reinterpret to another type.  May appear multiple times.
+   Description: An element value has been supplied with an additional
+   type information which could not be conveyed to the final
+   destination, and by dropping this information, the value got
+   reinterpreted as a different type.
+
+   TODO: properly augment ietf-netconf:error-tag-type.
+
+3.3.  Original type annotation
 
    In order to keep the type information with the value even through
-   conversion, transcoders MAY attach a type annotation to such a value.
-   The following module defines the "original-type" annotation.
+   conversion, transcoders (and generally encoders) MAY attach a type
+   annotation to such a value.  The following module defines the
+   "original-type" annotation.
 
    yang module ietf-yang-original-type { prefix "ot"; import ietf-yang-
    metadata { prefix "md"; } md:annotation original-type { type string;
@@ -203,13 +223,24 @@ Table of Contents
    SHOULD NOT be accepted as any other member type, even if a match is
    found.
 
+   By the same logic, this extends Section 6.10 of [RFC7951], so that
+   not only the implicit encoding of the value is taken into account,
+   but also the Original Type Annotation if present.
+
+   TODO: make an annotation draft for CBOR by tagging keys.
+
+   When encoding and decoding in and from CBOR with Standins
+   ([I-D.bormann-cbor-yang-standin]), a standin SHOULD be used whenever
+   possible.
+
    Specifying the Original Type Annotation also resolves possible
    problems with unions containing leafref as a member type.  The
    example in Section 9.12.4 of [RFC7950] becomes much simpler by
    explicitly indicating whether the value is intended to be interpreted
    as a leafref or something else.  Most notably, the original
    specification requires revalidation every time the target instance
-   may have been added or deleted, which may be costly.
+   may have been added or deleted, which may be error-prone for
+   development and costly for operations.
 
 4.  Proxying NETCONF, RESTCONF and CORECONF protocols
 
