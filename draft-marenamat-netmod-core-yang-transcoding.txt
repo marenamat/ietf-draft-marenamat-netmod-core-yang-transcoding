@@ -175,7 +175,12 @@ Table of Contents
 
    Example:
 
-   yang leaf item { type union { type int32; type string; } }
+   leaf item {
+     type union {
+       type int32;
+       type string;
+     }
+   }
 
    If the received JSON data is "item": "+3", the type is to be
    interpreted as a string, according to Section 6.10 of [RFC7951].
@@ -210,10 +215,16 @@ Table of Contents
    annotation to such a value.  The following module defines the
    "original-type" annotation.
 
-   yang module ietf-yang-original-type { prefix "ot"; import ietf-yang-
-   metadata { prefix "md"; } md:annotation original-type { type string;
-   description "This annotation contains the original type of the
-   annotated value."; } }
+   module ietf-yang-original-type {
+     prefix "ot";
+     import ietf-yang-metadata {
+       prefix "md";
+     }
+     md:annotation original-type {
+       type string;
+       description "This annotation contains the original type of the annotated value.";
+     }
+   }
 
    Example: <item ot:original-type="string">+3</item>
 
