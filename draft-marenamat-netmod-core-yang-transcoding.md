@@ -89,6 +89,8 @@ may even be completely unaware of such a proxy existing.
 
 {::boilerplate bcp14-tagged}
 
+TODO: define terms like Transcoder, Composer or XML Round Trip.
+
 # Transcoding Data Formats
 
 Encoding capabilities of XML, JSON or CBOR are quite different. While all
@@ -124,6 +126,8 @@ gets converted to `"item": "+3"` in JSON.
 
 Transcoders MAY choose to warn users when they are converting a non-canonical
 value representation.
+
+TODO: add CBOR examples
 
 ## The union Built-In Type
 
@@ -273,6 +277,6 @@ Otherwise: This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-This document is a result of prior work of myself and Carsten Bormann
+This document is a result of prior work of Maria Matějka and Carsten Bormann
 on {{-standin}}, and design discussions with Vojtěch Vilímek over
 a NETCONF-RESTCONF-CORECONF proxy.
