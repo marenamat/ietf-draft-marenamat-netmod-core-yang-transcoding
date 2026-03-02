@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Transcoding YANG Data</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Matejka</td>
-<td class="center">Expires 30 August 2026</td>
+<td class="center">Expires 3 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7950" class="eref">7950</a>, <a href="https://www.rfc-editor.org/rfc/rfc7951" class="eref">7951</a>, <a href="https://www.rfc-editor.org/rfc/rfc9254" class="eref">9254</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-26" class="published">26 February 2026</time>
+<time datetime="2026-03-02" class="published">2 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-30">30 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ specification. That data annotation behavior updates RFC 7950, RFC 7951 and RFC 
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1241,6 +1241,7 @@ may even be completely unaware of such a proxy existing.<a href="#section-1-3" c
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">TODO: define terms like Transcoder, Composer or XML Round Trip.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="transcoding-data-formats">
@@ -1274,6 +1275,7 @@ loses its original non-canonical string representation.<a href="#section-3-6" cl
 gets converted to <code>"item": "+3"</code> in JSON.<a href="#section-3-7" class="pilcrow">¶</a></p>
 <p id="section-3-8">Transcoders <span class="bcp14">MAY</span> choose to warn users when they are converting a non-canonical
 value representation.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-9">TODO: add CBOR examples<a href="#section-3-9" class="pilcrow">¶</a></p>
 <div id="the-union-built-in-type">
 <section id="section-3.1">
         <h3 id="name-the-union-built-in-type">
@@ -1444,7 +1446,7 @@ documented how these are handled.<a href="#section-6-1" class="pilcrow">¶</a></
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-comi">[I-D.ietf-core-comi]</dt>
       <dd>
-<span class="refAuthor">Veillette, M.</span>, <span class="refAuthor">Van der Stok, P.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bierman, A.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"CoAP Management Interface (CORECONF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-comi-20</span>, <time datetime="2025-05-06" class="refDate">6 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-20">https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-20</a>&gt;</span>. </dd>
+<span class="refAuthor">Veillette, M.</span>, <span class="refAuthor">Van der Stok, P.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bierman, A.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"CoAP Management Interface (CORECONF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-comi-21</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-21">https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
@@ -1486,7 +1488,7 @@ documented how these are handled.<a href="#section-6-1" class="pilcrow">¶</a></
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">This document is a result of prior work of myself and Carsten Bormann
+<p id="appendix-A-1">This document is a result of prior work of Maria Matějka and Carsten Bormann
 on <span>[<a href="#I-D.bormann-cbor-yang-standin" class="cite xref">I-D.bormann-cbor-yang-standin</a>]</span>, and design discussions with Vojtěch Vilímek over
 a NETCONF-RESTCONF-CORECONF proxy.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
